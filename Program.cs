@@ -1,7 +1,18 @@
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Portfolio.ParameterTransformers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
+{
+    options.Conventions.Add(new PageRouteTransformerConvention(new KebabPageRouteParameterTransformer()));
+});
+
+builder.Services.Configure<RouteOptions>(opt =>
+{
+    opt.LowercaseUrls = true;
+});
 
 var app = builder.Build();
 
