@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link 
+    rel="stylesheet" 
+    href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+    integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" 
+    crossorigin="anonymous"
+  >
+
+  <link rel="stylesheet" href="~/css/main.css" asp-append-version="true">
+  <title>@ViewData["Title"]</title>
+
+  <!-- Example HTML links for a favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/favicon_io/apple-touch-icon.png" asp-append-version="true">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/favicon_io/favicon-32x32.png" asp-append-version="true">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/favicon_io/favicon-16x16.png" asp-append-version="true">
+    <link rel="manifest" href="~/favicon_io/site.webmanifest" asp-append-version="true">
+</head>
+
+
+@functions {
+  string GetActiveClass(string pageName) {
+    var current = Context.Request.RouteValues["page"]?.ToString();
+    return string.Equals(current, pageName, StringComparison.OrdinalIgnoreCase) ? "current" : "";
+  }
+}
+
+<body id="@ViewData["HomePageBgImage"]">
+<header>
+  <div class="menu-btn">
+    <div class="btn-line"></div>
+    <div class="btn-line"></div>
+    <div class="btn-line"></div>
+  </div>
+
+  <nav class="menu">
+    <div class="menu-branding">
+      <div class="portrait"></div>
+    </div>
+    <ul class="menu-nav">
+      <li class="nav-item @GetActiveClass("/Index")">
+        <a asp-page="/Index" class="nav-link">
+          Home
+        </a>
+      </li>
+      <li class="nav-item @GetActiveClass("/About")">
+        <a asp-page="/About" class="nav-link">
+          About Me
+        </a>
+      </li>
+      <li class="nav-item @GetActiveClass("/Work")">
+        <a asp-page="/Work" class="nav-link">
+          My Work
+        </a>
+      </li>
+      <li class="nav-item @GetActiveClass("/Contact")">
+        <a asp-page="/Contact" class="nav-link">
+          How To Reach Me
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+@RenderBody()
+
+  <footer id="main-footer">
+    &copy; <span id="year"></span> Nathan Nguyen. All Rights Reserved.
+  </footer>
+
+  <script src="~/js/main.js" asp-append-version="true"></script>
+</body>
+
+</html>
